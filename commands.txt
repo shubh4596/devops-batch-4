@@ -2,3 +2,40 @@ git init
 git status
 git clone url
 git remote -v
+
+git remote set-url [--push] <name> <newurl> [<oldurl>] , how to use this commands
+
+The git remote set-url command is used to change the URL of a remote repository that your local Git repository is connected to. This is often used when you need to update the remote repository URL, for example, if the repository has been moved to a different location or if you want to switch from HTTPS to SSH for remote interactions. The command has the following syntax:
+
+
+git remote set-url [--push] <name> <newurl> [<oldurl>]
+Here's how to use the command:
+
+<name>: This is the name of the remote you want to modify. Remotes are typically named "origin" by default, but you can have multiple remotes with different names if you're working with multiple repositories.
+
+<newurl>: This is the new URL you want to set for the remote.
+
+[<oldurl>]: This part is optional. If you provide the old URL (the current URL of the remote), Git will only update the URL if the old URL matches. If you omit this parameter, Git will update the URL regardless of the old URL.
+
+[--push]: This option is also optional. If you include --push, Git will only modify the URL used for pushing changes. If you omit this option, both the fetch and push URLs will be updated.
+
+Here's an example of how you might use the command:
+
+Suppose you want to update the remote URL named "origin" from an HTTPS URL to an SSH URL. Here's how you would do it:
+
+# First, check the current remote URL (optional)
+git remote -v
+
+# Set the new URL for both fetch and push (HTTPS to SSH)
+git remote set-url origin git@github.com:username/repo.git
+
+# Verify the new remote URL (optional)
+git remote -v
+If you want to specify the old URL to ensure you're only updating it if it matches, you would do it like this:
+
+
+# Set the new URL only if the old URL matches
+git remote set-url origin git@github.com:username/repo.git https://github.com/username/repo.git
+Remember to replace origin with the appropriate remote name and update the URLs to match your actual repository details.
+
+Always be cautious when changing remote URLs, especially if you're working with collaborators or a shared repository, as this can affect how you interact with the remote repository.
